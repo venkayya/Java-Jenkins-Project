@@ -43,7 +43,7 @@ pipeline {
      }
      stage('Test On Debain') {
        agent {
-           docker 'openjdk:8u121-jre'
+           docker 'openjdk:latest'
        }
        steps {
            sh "wget http://venky6371.mylabserver.com/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
