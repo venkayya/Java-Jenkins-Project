@@ -1,5 +1,3 @@
-#!/bin/groovy
-
 pipeline {
   agent none
   
