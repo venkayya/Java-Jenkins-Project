@@ -28,8 +28,8 @@ pipeline {
          label 'apache'
        }
        steps {
-         sh "if [! -d '/var/www/html/rectangles/all/${BRANCH_NAME}']; then mkdir '/var/www/html/rectangles/all/${BRANCH_NAME}' fi"
-           sh "cp dist/rectangle_${BUILD_NUMBER}.jar /var/www/html/rectangles/all/${BRANCH_NAME}/"
+         sh "if [! -d '/var/www/html/rectangles/all/$BRANCH_NAME']; then mkdir '/var/www/html/rectangles/all/BRANCH_NAME' fi"
+           sh "cp dist/rectangle_$BUILD_NUMBER.jar /var/www/html/rectangles/all/$BRANCH_NAME/"
        }
      }
      stage('Running on Centos') {
@@ -37,8 +37,8 @@ pipeline {
            label 'CentOS'
        }
        steps {
-           sh "wget http://venky6371.mylabserver.com/rectangles/all/${BRANCH_NAME}/rectangle_${BUILD_NUMBER}.jar"
-           sh "java -jar rectangle_${BUILD_NUMBER}.jar 3 4"
+           sh "wget http://venky6371.mylabserver.com/rectangles/all/$BRANCH_NAME/rectangle_$BUILD_NUMBER.jar"
+           sh "java -jar rectangle_$BUILD_NUMBER.jar 3 4"
        }    
      }
      stage('Test On Debain') {
@@ -46,8 +46,8 @@ pipeline {
            docker 'openjdk:latest'
        }
        steps {
-           sh "wget http://venky6371.mylabserver.com/rectangles/all/${BRANCH_NAME}/rectangle_${BUILD_NUMBER}.jar"
-           sh "java -jar rectangle_${BUILD_NUMBER}.jar 3 4"
+           sh "wget http://venky6371.mylabserver.com/rectangles/all/$BRANCH_NAME/rectangle_$BUILD_NUMBER.jar"
+           sh "java -jar rectangle_$BUILD_NUMBER.jar 3 4"
        }
      }
      stage('Promote to Green') {
@@ -58,7 +58,7 @@ pipeline {
            branch 'master'
        }
        steps {
-           sh "cp /var/www/html/rectangles/all/rectangle_${BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${BUILD_NUMBER}.jar"    
+           sh "cp /var/www/html/rectangles/all/rectangle_$BUILD_NUMBER.jar /var/www/html/rectangles/green/rectangle_$BUILD_NUMBER.jar"    
       }
     }
     stage('Promote Development Branch to Master') {
