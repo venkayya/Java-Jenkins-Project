@@ -1,7 +1,5 @@
-#!/groovy
 pipeline {
   agent none
-  
   stages {
      stage('Unit Tests') {
        agent {
